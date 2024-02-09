@@ -6,7 +6,7 @@
 /*   By: jeshin <jeshin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:01:46 by jeshin            #+#    #+#             */
-/*   Updated: 2024/02/08 14:45:28 by jeshin           ###   ########.fr       */
+/*   Updated: 2024/02/09 15:37:16 by jeshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	init_dq(t_dq *dq)
 	dq->tail = 0;
 }
 
-int	is_dq_empty(t_dq *dq)
+int	is_empty_dq(t_dq *dq)
 {
 	if (dq->head == 0)
 		return (TRUE);
@@ -35,7 +35,7 @@ void	push_front_dq(t_dq *dq, DATA data)
 		return ;
 	new->data = data;
 	new->next = dq->head;
-	if (is_dq_empty(dq))
+	if (is_empty_dq(dq))
 		dq->tail = new;
 	else
 		dq->head->prev = new;
@@ -52,7 +52,7 @@ void	push_back_dq(t_dq *dq, DATA data)
 		return ;
 	new->data = data;
 	new->prev = dq->tail;
-	if (is_dq_empty(dq))
+	if (is_empty_dq(dq))
 		dq->head = new;
 	else
 		dq->tail->next = new;
@@ -63,7 +63,7 @@ void	push_back_dq(t_dq *dq, DATA data)
 void	pop_front_dq(t_dq *dq)
 {
 	t_node	*tmp;
-	if (is_dq_empty(dq))
+	if (is_empty_dq(dq))
 		return ;
 	tmp = dq->head;
 	dq->head = dq->head->next;
@@ -78,7 +78,7 @@ void	pop_back_dq(t_dq *dq)
 {
 	t_node	*tmp;
 
-	if (is_dq_empty(dq))
+	if (is_empty_dq(dq))
 		return ;
 	tmp = dq->tail;
 	dq->tail = dq->tail->prev;
@@ -97,14 +97,14 @@ void	clear_dq(t_dq *dq)
 
 DATA	front_dq(t_dq *dq)
 {
-	if (is_dq_empty(dq))
+	if (is_empty_dq(dq))
 		return (0);
 	return (dq->head->data);
 }
 
 DATA	back_dq(t_dq *dq)
 {
-	if (is_dq_empty(dq))
+	if (is_empty_dq(dq))
 		return (0);
 	return (dq->tail->data);
 }

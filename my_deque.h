@@ -6,7 +6,7 @@
 /*   By: jeshin <jeshin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:02:27 by jeshin            #+#    #+#             */
-/*   Updated: 2024/02/08 14:09:02 by jeshin           ###   ########.fr       */
+/*   Updated: 2024/02/09 15:36:16 by jeshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_dq
 }			t_dq;
 
 void	init_dq(t_dq *dq);
-int		is_dq_empty(t_dq *dq);
+int		is_empty_dq(t_dq *dq);
 void	push_front_dq(t_dq *dq, DATA data);
 void	push_back_dq(t_dq *dq, DATA data);
 void	pop_front_dq(t_dq *dq);

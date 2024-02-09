@@ -11,6 +11,7 @@ RM = rm -f
 SRCS_FILES = ft_isalpha.c\
 				ft_isdigit.c\
 				ft_atoi.c\
+				ft_atol.c\
 				ft_bzero.c\
 				ft_calloc.c\
 				ft_isalnum.c\

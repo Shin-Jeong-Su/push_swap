@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeshin <jeshin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/06 13:12:36 by jeshin            #+#    #+#             */
-/*   Updated: 2024/02/09 13:28:14 by jeshin           ###   ########.fr       */
+/*   Created: 2024/02/09 13:05:09 by jeshin            #+#    #+#             */
+/*   Updated: 2024/02/09 13:32:06 by jeshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	is_digit(const char ch)
 	return (0);
 }
 
-int	ft_atoi(const char *str)
+long long	ft_atol(const char *str)
 {
 	long long	sign;
 	long long	ret;
@@ -44,5 +44,5 @@ int	ft_atoi(const char *str)
 		ret = ret * 10 + (*str - '0');
 		str++;
 	}
-	return ((int)(sign * ret));
+	return ((sign * ret));
 }

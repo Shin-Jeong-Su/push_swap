@@ -1,33 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   doubly_linked_list.h                               :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeshin <jeshin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/07 17:39:04 by jeshin            #+#    #+#             */
-/*   Updated: 2024/02/08 13:45:08 by jeshin           ###   ########.fr       */
+/*   Created: 2024/02/14 20:09:19 by jeshin            #+#    #+#             */
+/*   Updated: 2024/02/15 12:06:30 by jeshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DOUBLY_LINKED_LIST_H
-# define DOUBLY_LINKED_LIST_H
+#include "push_swap.h"
 
-#include <stdlib.h>
-
-typedef int	DATA;
-
-typedef struct s_node
+void	check_leaks(void)
 {
-	DATA			data;
-	struct s_node	*prev;
-	struct s_node	*next;
-}			t_node;
+	system("leaks a.out");
+}
 
-typedef struct s_dlst
+void	free_tab(char **tab)
 {
-	t_node *head;
-	t_node *tail;
-}		t_dlst;
+	int	i;
 
-#endif
+	i = -1;
+	while (tab[++i])
+		free(tab[i]);
+	free(tab);
+}
+
+void	free_all(char ***tab)
+{
+	int	i;
+
+	i = -1;
+	while (tab[++i])
+		free_tab(tab[i]);
+	free(tab);
+}
+
+void	take_error(void)
+{
+	ft_putstr_fd("Error\n", 2);
+	exit(EXIT_FAILURE);
+}

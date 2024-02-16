@@ -6,88 +6,132 @@
 /*   By: jeshin <jeshin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:58:41 by jeshin            #+#    #+#             */
-/*   Updated: 2024/02/09 16:06:41 by jeshin           ###   ########.fr       */
+/*   Updated: 2024/02/15 17:34:30 by jeshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	take_error(void)
+static int	has_same_int(t_dq *dq)
 {
-	ft_putstr_fd("Error\n", 2);
-	exit(EXIT_FAILURE);
+	t_node	*start;
+	t_node	*cmp;
+
+	start = dq->head;
+	while (start)
+	{
+		cmp = start->next;
+		while (cmp)
+		{
+			if (start->data == cmp->data)
+				return (1);
+			cmp = cmp->next;
+		}
+		start = start->next;
+	}
+	return (0);
 }
 
-static int	is_in_int(char *str)
-{
-	if ((long long)ft_atoi(str) != ft_atol(str))
-		return (0);
-	else
-		return (1);
-}
-
-static int	get_int_tab(int argc, char *argv[], int **tab)
+static int	push_each_to_dq(char **each, t_dq *dq)
 {
 	int		i;
-	int		j;
+
+	while (*each)
+	{
+		i = 0;
+		if ((*each)[0] == 0)
+			return (0);
+		else if ((*each)[0] == '-')
+			i++;
+		while ((*each)[i])
+		{
+			if (ft_isdigit((*each)[i]) == 0)
+				return (0);
+			i++;
+		}
+		if ((long long)ft_atoi(*each) == ft_atol(*each))
+			push_back_dq(dq, ft_atoi(*each));
+		each++;
+	}
+	return (1);
+}
+
+static char	***get_av_tab(int ac, char **av, t_dq *dq)
+{
+	int		i;
+	char	***tab;
 
 	i = 0;
-	while (++i < argc)
-	{
-		if (argv[i][0] == 0)
-			return (0);
-		j = -1;
-		while (argv[i][++j] != 0)
-		{
-			if (j == 0 && argv[i][j] == '-')
-				continue ;
-			if (!ft_isdigit(argv[i][j]))
-				return (0);
-		}
-		if (!is_in_int(argv[i]))
-			return (0);
-		(*tab)[i - 1] = ft_atoi(argv[i]);
-	}
-	return (1);
-}
-
-static int	is_no_same_int(int size, int *tab)
-{
-	int	i;
-	int	j;
-
+	tab = (char ***)malloc(sizeof(char **) * ac);
+	if (tab == 0)
+		return (0);
+	tab[ac - 1] = 0;
+	while (av[++i])
+		tab[i - 1] = ft_split(av[i], ' ');
 	i = -1;
-	while (++i < size)
+	while (tab[++i])
 	{
-		j = i;
-		while (++j < size)
+		if (!push_each_to_dq(tab[i], dq))
 		{
-			if (tab[i] == tab[j])
-				return (0);
+			free_all(tab);
+			clear_dq(dq);
+			return (0);
 		}
 	}
-	return (1);
+	return (tab);
 }
 
-void	init(int argc, char *argv[], t_dq *dq)
+static void	push_idx_to_dq(int *idx_tab, t_dq *a, t_dq *b)
 {
-	int		i;
-	int		*tab;
+	t_node	*here;
+	int		k;
+	int		l;
 
-	tab = (int *)malloc(sizeof(int) * (argc - 1));
-	if (!get_int_tab(argc, argv, &tab))
+	here = b->head;
+	k = 0;
+	while (here)
 	{
-		free(tab);
-		take_error();
+		idx_tab[k++] = here->data;
+		here = here->next;
 	}
-	if (!is_no_same_int(argc - 1, tab))
+	quick_sort(idx_tab, 0, b->size - 1);
+	here = b->tail;
+	while (here)
 	{
-		free(tab);
-		take_error();
+		l = 0;
+		while (l < b->size)
+		{
+			if (here->data == idx_tab[l])
+				push_front_dq(a, l);
+			l++;
+		}
+		here = here->prev;
 	}
-	init_dq(dq);
-	i = -1;
-	while (++i < argc - 1)
-		push_back_dq(dq, tab[i]);
-	free(tab);
+}
+
+int	init(int ac, char **av, t_dq *a, t_dq *b)
+{
+	char	***tab;
+	int		*idx_tab;
+
+	init_dq(a);
+	init_dq(b);
+	tab = get_av_tab(ac, av, b);
+	if (tab == 0)
+		return (0);
+	if (has_same_int(b))
+	{
+		free_all(tab);
+		clear_dq(b);
+		return (0);
+	}
+	idx_tab = (int *)malloc(sizeof(int) * b->size);
+	if (idx_tab == 0)
+		return (0);
+	push_idx_to_dq(idx_tab, a, b);
+	while (!is_empty_dq(b))
+		pop_back_dq(b);
+	free(idx_tab);
+	free_all(tab);
+	return (1);
 }

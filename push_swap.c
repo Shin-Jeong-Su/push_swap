@@ -6,81 +6,88 @@
 /*   By: jeshin <jeshin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 15:20:00 by jeshin            #+#    #+#             */
-/*   Updated: 2024/02/09 16:06:36 by jeshin           ###   ########.fr       */
+/*   Updated: 2024/02/16 17:50:01 by jeshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	swap(t_dq *stack)
-{
-	int		tmp;
+static int	sort_a(t_dq *a, t_dq *b, int rng);
+static int	sort_b(t_dq *a, t_dq *b, int rng);
 
-	if (is_empty_dq(stack))
-		return (0);
-	tmp = stack->head->data;
-	stack->head->data = stack->head->next->data;
-	stack->head->next->data = tmp;
-	return (1);
+static void	retape(t_dq *a, t_dq *b, t_idx_info *info)
+{
+	int			i;
+	int			j;
+
+	i = -1;
+	j = -1;
+	while (++i < info->ra_times && ++j < info->rb_times)
+		go_cmds(a, b, "rrr");
+	while (++i < info->ra_times)
+		go_cmds(a, 0, "rra");
+	while (++j < info->rb_times)
+		go_cmds(0, b, "rrb");
 }
 
-int	push(t_dq *from, t_dq *to)
+//등호, 이해, 
+static int	sort_a(t_dq *a, t_dq *b, int rng)
 {
-	int	from_data;
+	t_idx_info	info;
 
-	if (is_empty_dq(from))
-		return (0);
-	from_data = front_dq(from);
-	pop_front_dq(from);
-	push_front_dq(to, from_data);
-	return (1);
-}
-
-int	rotate(t_dq *stack, int reverse)
-{
-	int		tmp;
-
-	if (is_empty_dq(stack))
-		return (0);
-	if (reverse)
+	init_idx_info(&info, a, rng);
+	if (rng <= 3)
+		return (sort_size_lower_than_3(a, A, a->size));
+	while (rng--)
 	{
-		tmp = back_dq(stack);
-		pop_back_dq(stack);
-		push_front_dq(stack, tmp);
+		info.data = front_dq(a);
+		if (info.data >= info.lrg_pivot)
+			info.ra_times += go_cmds(a, b, "ra");
+		else
+		{
+			info.pb_times += go_cmds(a, b, "pb");
+			if (info.data >= info.sml_pivot)
+				info.rb_times += go_cmds(a, b, "rb");
+		}
 	}
+	retape(a, b, &info);
+	sort_a(a, b, info.ra_times);
+	sort_b(a, b, info.rb_times);
+	sort_b(a, b, info.pb_times);
+	return (1);
+}
+
+static int	sort_b(t_dq *a, t_dq *b, int rng)
+{
+	t_idx_info	info;
+
+	init_idx_info(&info, a, rng);
+	if (rng == 3)
+		return (sort_size_lower_than_3(b, B, a->size));
+	while (rng--)
+	{
+		info.data = front_dq(b);
+		if (info.data < info.sml_pivot)
+			info.rb_times += go_cmds(a, b, "rb");
+		else
+		{
+			info.pa_times += go_cmds(a, b, "pa");
+			if (info.data < info.lrg_pivot)
+				info.rb_times += go_cmds(a, b, "ra");
+		}
+	}
+	sort_a(a, b, info.pa_times - info.ra_times);
+	retape(a, b, &info);
+	sort_a(a, b, info.ra_times);
+	sort_b(a, b, info.rb_times);
+	return (1);
+}
+
+int	push_swap(t_dq *a, t_dq *b, int size)
+{
+	if (size <= 3)
+		return (sort_size_lower_than_3(a, A, a->size));
 	else
-	{
-		tmp = front_dq(stack);
-		pop_front_dq(stack);
-		push_back_dq(stack, tmp);
-	}
+		return (sort_a(a, b, a->size));
 	return (1);
-}
-
-int	command(t_dq *a, t_dq *b, char *input)
-{
-	if (!ft_strncmp(input, "pa\n", 4))
-		return (push(b, a));
-	else if (!ft_strncmp(input, "pb\n", 4))
-		return (push(a, b));
-	else if (!ft_strncmp(input, "sa\n", 4))
-		return (swap(a));
-	else if (!ft_strncmp(input, "sb\n", 4))
-		retrun (swap(b));
-	else if (!ft_strncmp(input, "ss\n", 4))
-		return (swap(a) & swap(b));
-	else if (!ft_strncmp(input, "ra\n", 4))
-		return (rotate(a, 0));
-	else if (!ft_strncmp(input, "rb\n", 4))
-		return (rotate(b, 0));
-	else if (!ft_strncmp(input, "rr\n", 4))
-		return (rotate(a, 0) & rotate(b, 0));
-	else if (!ft_strncmp(input, "rra\n", 5))
-		return (rotate(a, 1));
-	else if (!ft_strncmp(input, "rrb\n", 5))
-		return (rotate(b, 1));
-	else if (!ft_strncmp(input, "rrr\n", 5))
-		return (rotate(a, 1) & rotate(b, 1));
-	take_error();
-	return (0);
 }

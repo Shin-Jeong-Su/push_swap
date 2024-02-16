@@ -6,7 +6,7 @@
 /*   By: jeshin <jeshin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:20:48 by jeshin            #+#    #+#             */
-/*   Updated: 2024/02/16 19:59:44 by jeshin           ###   ########.fr       */
+/*   Updated: 2024/02/16 20:22:43 by jeshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,27 +65,26 @@ static int	push_b_to_a(t_dq *a, t_dq *b)
 	
 	fir = b->head->data;
 	sec = b->head->next->data;
-	thr = b->head->next->data;
+	thr = b->head->next->next->data;
 //321 : pa pa pa;
 	if (fir > sec && sec > thr)
 		return (go_cmds(a, b , "pa") & go_cmds(a, b , "pa") & go_cmds(a, b , "pa"));
 //312 : pa sb pa pa
 	if (fir > thr && sec < thr)
 		return (go_cmds(a, b , "pa") & go_cmds(0, b, "sb") & go_cmds(a, b , "pa") & go_cmds(a, b , "pa"));
-//213 : sb rb rb pa rrb rrb pa pa
+//213 : rrb pa pa pa
 	if (fir > sec && fir < thr)
-		return (go_cmds(0, b, "sb") &go_cmds(0, b, "rb") &go_cmds(0, b, "rb") &go_cmds(a, b, "pa") \
-		& go_cmds(0, b, "rrb") &go_cmds(0, b, "rrb") &go_cmds(a, b, "pa") &go_cmds(a, b, "pa"));
+		return (go_cmds(0, b, "rrb") & go_cmds(a, b, "pa") & go_cmds(a, b, "pa") & go_cmds(a, b, "pa"));
 //231 : sb pa pa pa
 	if (fir < sec && fir > thr)
 		return (go_cmds(0, b , "sb") & go_cmds(a, b, "pa") & go_cmds(a, b , "pa") & go_cmds(a, b , "pa"));
-//123 : rb rb pa rrb pa rrb pa
+//123 : rrb pa rrb pa pa
 	if (fir < sec && sec < thr)
-		return (go_cmds(0, b , "rb") & go_cmds(0, b, "rb") & go_cmds(a, b , "pa") & go_cmds(0, b , "rrb")\
-		& go_cmds(a, b , "pa") &go_cmds(0, b , "rrb") &go_cmds(a, b , "pa"));
-//132 : rb pa pa rrb pa
+		return (go_cmds(0, b , "rrb") & go_cmds(a, b , "pa") & go_cmds(0, b, "rrb")\
+		& go_cmds(a, b , "pa") &go_cmds(a, b , "pa"));
+//132 : sb pa sb pa pa
 	if (fir < sec && sec < thr)
-		return (go_cmds(0, b , "rb") & go_cmds(a, b, "pa") & go_cmds(a, b , "pa") & go_cmds(0, b , "rrb")\
+		return (go_cmds(0, b , "sb") & go_cmds(a, b, "pa") & go_cmds(a, b , "sb") \
 		& go_cmds(a, b , "pa"));
 	return (0);
 }

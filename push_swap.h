@@ -6,7 +6,7 @@
 /*   By: jeshin <jeshin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 10:51:43 by jeshin            #+#    #+#             */
-/*   Updated: 2024/02/16 17:40:28 by jeshin           ###   ########.fr       */
+/*   Updated: 2024/02/16 19:05:57 by jeshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		go_cmds(t_dq *a, t_dq *b, char *input);
 //push_swap.c
 int		push_swap(t_dq *a, t_dq *b, int size);
 //push_swap2.c
-int		sort_size_lower_than_3(t_dq *dq, int which, int size);
+int		sort_size_lower_than_3(t_dq *a, t_dq *b, int which, int size);
 void	init_idx_info(t_idx_info *info, t_dq *dq, int rng);
 
 #endif

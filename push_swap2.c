@@ -6,7 +6,7 @@
 /*   By: jeshin <jeshin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:20:48 by jeshin            #+#    #+#             */
-/*   Updated: 2024/02/16 17:52:08 by jeshin           ###   ########.fr       */
+/*   Updated: 2024/02/16 19:59:44 by jeshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static void get_pivot(t_idx_info *info, t_dq *dq, int rng)
 {
 	int		start;
+	int		tmp;
 	t_node *here;
 
 	start = rng;
@@ -26,6 +27,12 @@ static void get_pivot(t_idx_info *info, t_dq *dq, int rng)
 		else if (start == rng / 3 * 2)
 			info->lrg_pivot = here->data;
 		here = here->next;
+	}
+	if (info->sml_pivot > info->lrg_pivot)
+	{
+		tmp = info->sml_pivot;
+		info->sml_pivot = info->lrg_pivot;
+		info->lrg_pivot = tmp;
 	}
 }
 
@@ -50,7 +57,7 @@ static int	is_asc(t_dq *dq)
 }
 
 //321, 312, 213, 231, 123, 132
-static int	push_b_to_a(t_dq *b)
+static int	push_b_to_a(t_dq *a, t_dq *b)
 {
 	int	fir;
 	int	sec;
@@ -61,25 +68,25 @@ static int	push_b_to_a(t_dq *b)
 	thr = b->head->next->data;
 //321 : pa pa pa;
 	if (fir > sec && sec > thr)
-		return (go_cmds(0, b , "pa") & go_cmds(0, b , "pa") & go_cmds(0, b , "pa"));
+		return (go_cmds(a, b , "pa") & go_cmds(a, b , "pa") & go_cmds(a, b , "pa"));
 //312 : pa sb pa pa
 	if (fir > thr && sec < thr)
-		return (go_cmds(0, b , "pa") & go_cmds(0, b, "sb") & go_cmds(0, b , "pa") & go_cmds(0, b , "pa"));
+		return (go_cmds(a, b , "pa") & go_cmds(0, b, "sb") & go_cmds(a, b , "pa") & go_cmds(a, b , "pa"));
 //213 : sb rb rb pa rrb rrb pa pa
 	if (fir > sec && fir < thr)
-		return (go_cmds(0, b, "sb") &go_cmds(0, b, "rb") &go_cmds(0, b, "rb") &go_cmds(0, b, "pa") \
-		& go_cmds(0, b, "rrb") &go_cmds(0, b, "rrb") &go_cmds(0, b, "pb") &go_cmds(0, b, "pb"));
+		return (go_cmds(0, b, "sb") &go_cmds(0, b, "rb") &go_cmds(0, b, "rb") &go_cmds(a, b, "pa") \
+		& go_cmds(0, b, "rrb") &go_cmds(0, b, "rrb") &go_cmds(a, b, "pa") &go_cmds(a, b, "pa"));
 //231 : sb pa pa pa
 	if (fir < sec && fir > thr)
-		return (go_cmds(0, b , "sb") & go_cmds(0, b, "pa") & go_cmds(0, b , "pa") & go_cmds(0, b , "pa"));
+		return (go_cmds(0, b , "sb") & go_cmds(a, b, "pa") & go_cmds(a, b , "pa") & go_cmds(a, b , "pa"));
 //123 : rb rb pa rrb pa rrb pa
 	if (fir < sec && sec < thr)
-		return (go_cmds(0, b , "rb") & go_cmds(0, b, "rb") & go_cmds(0, b , "pa") & go_cmds(0, b , "rrb")\
-		& go_cmds(0, b , "pa") &go_cmds(0, b , "rrb") &go_cmds(0, b , "pa"));
+		return (go_cmds(0, b , "rb") & go_cmds(0, b, "rb") & go_cmds(a, b , "pa") & go_cmds(0, b , "rrb")\
+		& go_cmds(a, b , "pa") &go_cmds(0, b , "rrb") &go_cmds(a, b , "pa"));
 //132 : rb pa pa rrb pa
 	if (fir < sec && sec < thr)
-		return (go_cmds(0, b , "rb") & go_cmds(0, b, "pa") & go_cmds(0, b , "pa") & go_cmds(0, b , "rrb")\
-		& go_cmds(0, b , "pa"));
+		return (go_cmds(0, b , "rb") & go_cmds(a, b, "pa") & go_cmds(a, b , "pa") & go_cmds(0, b , "rrb")\
+		& go_cmds(a, b , "pa"));
 	return (0);
 }
 
@@ -115,31 +122,31 @@ static int	sort_a_of_size_3(t_dq *a)
 	return (0);
 }
 
-int	sort_size_lower_than_3(t_dq *dq, int which, int size)
+int	sort_size_lower_than_3(t_dq *a, t_dq *b, int which, int size)
 {
 	//a일때
 	if (which == A)
 	{
-		if (is_asc(dq) || size == 0 || size == 1)
+		if (is_asc(a) || size == 0 || size == 1)
 			return (1);
 		else if (size == 2)
-			return (go_cmds(dq, 0, "sa"));
-		return (sort_a_of_size_3(dq));
+			return (go_cmds(a, 0, "sa"));
+		return (sort_a_of_size_3(a));
 	}
 	//b일때
 	if (size == 0)
 		return (1);
 	else if (size == 1)
-		return (go_cmds(0, dq , "pa"));
+		return (go_cmds(a, b , "pa"));
 	else if (size == 2)
 	{
-		if (dq->head->next->data > dq->head->next->next->data)
-			return (go_cmds(0, dq, "pa") & go_cmds(0, dq, "pa"));
+		if (b->head->data > b->head->next->data)
+			return (go_cmds(a, b, "pa") & go_cmds(a, b, "pa"));
 		else
-			return (go_cmds(0, dq, "sb") & go_cmds(0, dq, "pa") & go_cmds(0, dq, "pa"));
+			return (go_cmds(0, b, "sb") & go_cmds(a, b, "pa") & go_cmds(a, b, "pa"));
 	}
 	else if (size == 3)
-		return (push_b_to_a(dq));
+		return (push_b_to_a(a, b));
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jeshin <jeshin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 15:20:00 by jeshin            #+#    #+#             */
-/*   Updated: 2024/02/16 20:09:07 by jeshin           ###   ########.fr       */
+/*   Updated: 2024/02/17 18:01:30 by jeshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static int	sort_b(t_dq *a, t_dq *b, int rng)
 		{
 			info.pa_times += go_cmds(a, b, "pa");
 			if (info.data < info.lrg_pivot)
-				info.rb_times += go_cmds(a, b, "ra");
+				info.ra_times += go_cmds(a, b, "ra");
 		}
 	}
 	sort_a(a, b, info.pa_times - info.ra_times);

@@ -1,4 +1,4 @@
-NAME = a.out
+NAME = push_swap
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 DEBUG = -g -fsanitize=address

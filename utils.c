@@ -6,7 +6,7 @@
 /*   By: jeshin <jeshin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 20:09:19 by jeshin            #+#    #+#             */
-/*   Updated: 2024/02/15 12:06:30 by jeshin           ###   ########.fr       */
+/*   Updated: 2024/02/17 16:11:05 by jeshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	check_leaks(void)
 {
-	system("leaks a.out");
+	system("leaks push_swap");
 }
 
 void	free_tab(char **tab)

@@ -6,7 +6,7 @@
 /*   By: jeshin <jeshin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:20:48 by jeshin            #+#    #+#             */
-/*   Updated: 2024/02/16 20:22:43 by jeshin           ###   ########.fr       */
+/*   Updated: 2024/02/17 17:52:40 by jeshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,16 @@ static void get_pivot(t_idx_info *info, t_dq *dq, int rng)
 	}
 }
 
-static int	is_asc(t_dq *dq)
+static int	is_asc(t_dq *dq, int size)
 {
 	t_node	*pos;
 	int		tmp;
+	int		i;
 
+	i = -1;
 	pos = dq->head;
 	tmp = dq->head->data;
-	while (pos->next)
+	while (++i < size && pos->next)
 	{
 		if (tmp < pos->next->data)
 		{
@@ -98,7 +100,7 @@ static int	sort_a_of_size_3(t_dq *a)
 
 	fir = a->head->data;
 	sec = a->head->next->data;
-	thr = a->tail->data;
+	thr = a->head->next->next->data;
 //123
 	if (fir < sec && sec < thr)
 		return (1);
@@ -126,7 +128,7 @@ int	sort_size_lower_than_3(t_dq *a, t_dq *b, int which, int size)
 	//a일때
 	if (which == A)
 	{
-		if (is_asc(a) || size == 0 || size == 1)
+		if (is_asc(a, size) || size == 0 || size == 1)
 			return (1);
 		else if (size == 2)
 			return (go_cmds(a, 0, "sa"));

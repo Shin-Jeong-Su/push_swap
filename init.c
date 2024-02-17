@@ -6,7 +6,7 @@
 /*   By: jeshin <jeshin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:58:41 by jeshin            #+#    #+#             */
-/*   Updated: 2024/02/15 17:34:30 by jeshin           ###   ########.fr       */
+/*   Updated: 2024/02/17 18:13:29 by jeshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ static int	push_each_to_dq(char **each, t_dq *dq)
 			return (0);
 		else if ((*each)[0] == '-')
 			i++;
+		if ((*each)[i] == 0)
+			return (0);
 		while ((*each)[i])
 		{
 			if (ft_isdigit((*each)[i]) == 0)
@@ -114,6 +116,8 @@ int	init(int ac, char **av, t_dq *a, t_dq *b)
 	char	***tab;
 	int		*idx_tab;
 
+	if (ac <= 1)
+		return (0);
 	init_dq(a);
 	init_dq(b);
 	tab = get_av_tab(ac, av, b);

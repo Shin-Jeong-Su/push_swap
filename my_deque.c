@@ -6,7 +6,7 @@
 /*   By: jeshin <jeshin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:01:46 by jeshin            #+#    #+#             */
-/*   Updated: 2024/02/17 18:08:29 by jeshin           ###   ########.fr       */
+/*   Updated: 2024/02/19 18:17:45 by jeshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	push_front_dq(t_dq *dq, int data)
 {
 	t_node	*new;
 
+	if (dq == 0)
+		return ;
 	new = (t_node *)malloc(sizeof(t_node));
 	if (!new)
 		return ;
@@ -49,6 +51,8 @@ void	push_back_dq(t_dq *dq, int data)
 {
 	t_node	*new;
 
+	if (dq == 0)
+		return ;
 	new = (t_node *)malloc(sizeof(t_node));
 	if (!new)
 		return ;

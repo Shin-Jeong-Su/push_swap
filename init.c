@@ -6,7 +6,7 @@
 /*   By: jeshin <jeshin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:58:41 by jeshin            #+#    #+#             */
-/*   Updated: 2024/02/17 18:13:29 by jeshin           ###   ########.fr       */
+/*   Updated: 2024/02/19 16:25:43 by jeshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,25 +34,35 @@ static int	has_same_int(t_dq *dq)
 
 static int	push_each_to_dq(char **each, t_dq *dq)
 {
-	int		i;
+	int			i;
+	int			ret;
+	size_t		size;
 
+	if (*each == 0)
+		return (0);
 	while (*each)
 	{
+		// if ((*each)[0] == 0)
+		// 	return (0);
 		i = 0;
-		if ((*each)[0] == 0)
-			return (0);
-		else if ((*each)[0] == '-')
+		if ((*each)[0] == '-')
 			i++;
 		if ((*each)[i] == 0)
 			return (0);
+		size = (size_t)i;
 		while ((*each)[i])
 		{
 			if (ft_isdigit((*each)[i]) == 0)
 				return (0);
 			i++;
+			size++;
 		}
-		if ((long long)ft_atoi(*each) == ft_atol(*each))
-			push_back_dq(dq, ft_atoi(*each));
+		ret = ft_atoi(*each);
+		if (size != ft_strlen(ft_itoa(ret)))
+			return (0);
+		// if ((long long)ft_atoi(*each) != ft_atol(*each))
+		// 	return (0);
+		push_back_dq(dq, ret);
 		each++;
 	}
 	return (1);
@@ -104,7 +114,10 @@ static void	push_idx_to_dq(int *idx_tab, t_dq *a, t_dq *b)
 		while (l < b->size)
 		{
 			if (here->data == idx_tab[l])
+			{
 				push_front_dq(a, l);
+				break;
+			}
 			l++;
 		}
 		here = here->prev;

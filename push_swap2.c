@@ -6,7 +6,7 @@
 /*   By: jeshin <jeshin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:20:48 by jeshin            #+#    #+#             */
-/*   Updated: 2024/02/17 17:52:40 by jeshin           ###   ########.fr       */
+/*   Updated: 2024/02/19 18:51:48 by jeshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,20 +74,21 @@ static int	push_b_to_a(t_dq *a, t_dq *b)
 //312 : pa sb pa pa
 	if (fir > thr && sec < thr)
 		return (go_cmds(a, b , "pa") & go_cmds(0, b, "sb") & go_cmds(a, b , "pa") & go_cmds(a, b , "pa"));
-//213 : rrb pa pa pa
+//213 : sb rb rb pa rrb pa rrb pa
 	if (fir > sec && fir < thr)
-		return (go_cmds(0, b, "rrb") & go_cmds(a, b, "pa") & go_cmds(a, b, "pa") & go_cmds(a, b, "pa"));
+		return (go_cmds(0, b, "sb") & go_cmds(0, b, "rb") & go_cmds(0, b, "rb") & go_cmds(a, b, "pa")\
+		& go_cmds(0, b, "rrb") & go_cmds(a, b, "pa") & go_cmds(a, b, "rrb") & go_cmds(a, b, "pa"));
 //231 : sb pa pa pa
 	if (fir < sec && fir > thr)
 		return (go_cmds(0, b , "sb") & go_cmds(a, b, "pa") & go_cmds(a, b , "pa") & go_cmds(a, b , "pa"));
-//123 : rrb pa rrb pa pa
+//123 : rb rb pa rrb pa rrb pa
 	if (fir < sec && sec < thr)
-		return (go_cmds(0, b , "rrb") & go_cmds(a, b , "pa") & go_cmds(0, b, "rrb")\
-		& go_cmds(a, b , "pa") &go_cmds(a, b , "pa"));
+		return (go_cmds(0, b , "rb") & go_cmds(0, b , "rb") & go_cmds(a, b, "pa")\
+		& go_cmds(0, b , "rrb") &go_cmds(a, b , "pa") &go_cmds(0, b , "rrb") &go_cmds(a, b , "pa"));
 //132 : sb pa sb pa pa
 	if (fir < sec && sec < thr)
-		return (go_cmds(0, b , "sb") & go_cmds(a, b, "pa") & go_cmds(a, b , "sb") \
-		& go_cmds(a, b , "pa"));
+		return (go_cmds(0, b , "sb") & go_cmds(a, b, "pa") & go_cmds(0, b , "sb") \
+		& go_cmds(a, b , "pa") & go_cmds(a, b , "pa"));
 	return (0);
 }
 
@@ -106,13 +107,13 @@ static int	sort_a_of_size_3(t_dq *a)
 		return (1);
 //132 : ra sa rra
 	else if (fir < thr && sec > thr)
-		return (go_cmds(a, 0, "ra") & go_cmds(a, 0, "sa") & go_cmds(a, 0, "rra"));
+		return (go_cmds(a,0,"ra") &go_cmds(a, 0, "sa") & go_cmds(a, 0, "rra"));
 //213 : sa
 	else if (fir > sec && fir < thr)
 		return (go_cmds(a, 0, "sa"));
 //231 : ra sa rra sa
 	else if (fir < sec && fir > thr)
-		return (go_cmds(a, 0, "ra") & go_cmds(a, 0, "sa") & go_cmds(a, 0, "rra") & go_cmds(a,0,"sa"));
+		return (go_cmds(a, 0, "ra")&go_cmds(a, 0, "sa")&go_cmds(a, 0, "rra") &go_cmds(a, 0, "sa"));
 //312 : sa ra sa rra
 	else if (fir > thr && sec < thr)
 		return (go_cmds(a, 0, "sa") & go_cmds(a, 0, "ra") & go_cmds(a, 0, "sa") & go_cmds(a, 0, "rra"));

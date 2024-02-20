@@ -6,7 +6,7 @@
 /*   By: jeshin <jeshin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 20:09:19 by jeshin            #+#    #+#             */
-/*   Updated: 2024/02/17 16:11:05 by jeshin           ###   ########.fr       */
+/*   Updated: 2024/02/20 17:58:09 by jeshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,26 @@ void	take_error(void)
 {
 	ft_putstr_fd("Error\n", 2);
 	exit(EXIT_FAILURE);
+}
+
+int	is_asc(t_dq *dq, int size)
+{
+	t_node	*pos;
+	int		tmp;
+	int		i;
+
+	i = -1;
+	pos = dq->head;
+	tmp = dq->head->data;
+	while (++i < size - 1 && pos->next)
+	{
+		if (tmp + 1 == pos->next->data)
+		{
+			tmp = pos->next->data;
+			pos = pos->next;
+		}
+		else
+			return (0);
+	}
+	return (1);
 }

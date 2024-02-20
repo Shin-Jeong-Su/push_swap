@@ -6,7 +6,7 @@
 /*   By: jeshin <jeshin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 10:51:43 by jeshin            #+#    #+#             */
-/*   Updated: 2024/02/16 19:05:57 by jeshin           ###   ########.fr       */
+/*   Updated: 2024/02/20 19:17:44 by jeshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_idx_info
 	int	rb_times;
 	int	data;
 	int	rng;
+	int	already;
 }	t_idx_info;
 
 //utils.c
@@ -36,16 +37,21 @@ void	check_leaks(void);
 void	free_tab(char **tab);
 void	free_all(char ***tab);
 void	take_error(void);
-//quick_sort.c
-void	quick_sort(int *arr, int left, int right);
+int		is_asc(t_dq *dq, int size);
 //init.c
 int		init(int ac, char **av, t_dq *a, t_dq *b);
+//init_info.c
+void	init_idx_info(t_idx_info *info, t_dq *here, t_dq *there, int rng);
+//quick_sort.c
+void	quick_sort(int *arr, int left, int right);
 //command.c
 int		go_cmds(t_dq *a, t_dq *b, char *input);
 //push_swap.c
 int		push_swap(t_dq *a, t_dq *b, int size);
-//push_swap2.c
+//sort_3.c
+int		sort_a_of_size_3(t_dq *a);
 int		sort_size_lower_than_3(t_dq *a, t_dq *b, int which, int size);
-void	init_idx_info(t_idx_info *info, t_dq *dq, int rng);
-
+//sort_4_n_5.c
+int	sort_a_of_size_4(t_dq *a, t_dq *b, int min);
+int	sort_a_of_size_5(t_dq *a, t_dq *b, int min);
 #endif

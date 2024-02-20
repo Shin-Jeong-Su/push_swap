@@ -9,10 +9,12 @@ SRCS_NAME = my_deque\
 			my_deque2\
 			utils\
 			init\
+			init_info\
 			quick_sort\
 			command\
 			push_swap\
-			push_swap2\
+			sort_3\
+			sort_4_n_5\
 			main
 SRCS = $(addsuffix .c,$(SRCS_NAME))
 OBJS = $(addsuffix .o,$(SRCS_NAME))

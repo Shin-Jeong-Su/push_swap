@@ -6,7 +6,7 @@
 /*   By: jeshin <jeshin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 15:20:00 by jeshin            #+#    #+#             */
-/*   Updated: 2024/02/19 17:01:16 by jeshin           ###   ########.fr       */
+/*   Updated: 2024/02/20 13:46:39 by jeshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static void	retape(t_dq *a, t_dq *b, t_idx_info *info)
 	}
 }
 
-//등호, 이해, 
 static int	sort_a(t_dq *a, t_dq *b, int rng)
 {
 	t_idx_info	info;
@@ -98,6 +97,6 @@ int	push_swap(t_dq *a, t_dq *b, int size)
 	if (size <= 3)
 		return (sort_size_lower_than_3(a, b, A, a->size));
 	else
-		return (sort_a(a, b, a->size));
+		return (sort_a(a, b, a->size)&sort_b(a, b, b->size));
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: jeshin <jeshin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:20:48 by jeshin            #+#    #+#             */
-/*   Updated: 2024/02/19 18:51:48 by jeshin           ###   ########.fr       */
+/*   Updated: 2024/02/20 13:47:49 by jeshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ static int	is_asc(t_dq *dq, int size)
 	i = -1;
 	pos = dq->head;
 	tmp = dq->head->data;
-	while (++i < size && pos->next)
+	while (++i < size - 1  && pos->next)
 	{
 		if (tmp < pos->next->data)
 		{
+			tmp = pos->next->data;
 			pos = pos->next;
-			tmp = pos->data;
 		}
 		else
 			return (0);
@@ -86,13 +86,13 @@ static int	push_b_to_a(t_dq *a, t_dq *b)
 		return (go_cmds(0, b , "rb") & go_cmds(0, b , "rb") & go_cmds(a, b, "pa")\
 		& go_cmds(0, b , "rrb") &go_cmds(a, b , "pa") &go_cmds(0, b , "rrb") &go_cmds(a, b , "pa"));
 //132 : sb pa sb pa pa
-	if (fir < sec && sec < thr)
+	if (fir < thr && sec > thr)
 		return (go_cmds(0, b , "sb") & go_cmds(a, b, "pa") & go_cmds(0, b , "sb") \
 		& go_cmds(a, b , "pa") & go_cmds(a, b , "pa"));
 	return (0);
 }
 
-//123, 132 , 213, 231, 312, 321
+//123, 132, 213, 231, 312, 321
 static int	sort_a_of_size_3(t_dq *a)
 {
 	int	fir;
@@ -126,7 +126,6 @@ static int	sort_a_of_size_3(t_dq *a)
 
 int	sort_size_lower_than_3(t_dq *a, t_dq *b, int which, int size)
 {
-	//a일때
 	if (which == A)
 	{
 		if (is_asc(a, size) || size == 0 || size == 1)
@@ -135,14 +134,13 @@ int	sort_size_lower_than_3(t_dq *a, t_dq *b, int which, int size)
 			return (go_cmds(a, 0, "sa"));
 		return (sort_a_of_size_3(a));
 	}
-	//b일때
 	if (size == 0)
 		return (1);
 	else if (size == 1)
 		return (go_cmds(a, b , "pa"));
 	else if (size == 2)
 	{
-		if (b->head->data > b->head->next->data)
+		if (b->head->data > b->head->next->data )
 			return (go_cmds(a, b, "pa") & go_cmds(a, b, "pa"));
 		else
 			return (go_cmds(0, b, "sb") & go_cmds(a, b, "pa") & go_cmds(a, b, "pa"));

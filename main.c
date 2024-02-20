@@ -6,7 +6,7 @@
 /*   By: jeshin <jeshin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:59:50 by jeshin            #+#    #+#             */
-/*   Updated: 2024/02/19 17:21:05 by jeshin           ###   ########.fr       */
+/*   Updated: 2024/02/20 13:16:09 by jeshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ int		main(int argc, char *argv[])
 	// printf("\n");
 	////////////////////
 
-	//push_swap
-	////////////////////
+	//push_swap ////////////////////
 	// printf("commands : \n");
 	push_swap(&a, &b, a.size);
 	// printf("\n");

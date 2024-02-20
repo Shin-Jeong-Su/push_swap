@@ -6,43 +6,39 @@
 /*   By: jeshin <jeshin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 17:54:53 by jeshin            #+#    #+#             */
-/*   Updated: 2024/02/20 19:38:34 by jeshin           ###   ########.fr       */
+/*   Updated: 2024/02/20 19:57:14 by jeshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-//321, 312, 213, 231, 123, 132
 static int	pa_rng_3(t_dq *a, t_dq *b)
 {
 	int	fir;
 	int	sec;
 	int	thr;
-	
+
 	fir = b->head->data;
 	sec = b->head->next->data;
 	thr = b->head->next->next->data;
-//321 : pa pa pa;
 	if (fir > sec && sec > thr)
-		return (go_cmds(a, b , "pa") & go_cmds(a, b , "pa") & go_cmds(a, b , "pa"));
-//312 : pa sb pa pa
+		return (go_cmds(a, b, "pa")	& go_cmds(a, b, "pa") & go_cmds(a, b, "pa"));
 	if (fir > thr && sec < thr)
-		return (go_cmds(a, b , "pa") & go_cmds(0, b, "sb") & go_cmds(a, b , "pa") & go_cmds(a, b , "pa"));
-//213 : sb rb rb pa rrb pa rrb pa
+		return (go_cmds(a, b, "pa") & go_cmds(0, b, "sb") & go_cmds(a, b, "pa") \
+		& go_cmds(a, b, "pa"));
 	if (fir > sec && fir < thr)
-		return (go_cmds(0, b, "sb") & go_cmds(0, b, "rb") & go_cmds(0, b, "rb") & go_cmds(a, b, "pa")\
-		& go_cmds(0, b, "rrb") & go_cmds(a, b, "pa") & go_cmds(a, b, "rrb") & go_cmds(a, b, "pa"));
-//231 : sb pa pa pa
+		return (go_cmds(0, b, "sb") & go_cmds(0, b, "rb") & go_cmds(0, b, "rb") \
+		& go_cmds(a, b, "pa") & go_cmds(0, b, "rrb")& go_cmds(a, b, "pa") \
+		& go_cmds(a, b, "rrb") & go_cmds(a, b, "pa"));
 	if (fir < sec && fir > thr)
-		return (go_cmds(0, b , "sb") & go_cmds(a, b, "pa") & go_cmds(a, b , "pa") & go_cmds(a, b , "pa"));
-//123 : rb rb pa rrb pa rrb pa
+		return (go_cmds(0, b, "sb") & go_cmds(a, b, "pa") \
+		& go_cmds(a, b, "pa") & go_cmds(a, b, "pa"));
 	if (fir < sec && sec < thr)
-		return (go_cmds(0, b , "rb") & go_cmds(0, b , "rb") & go_cmds(a, b, "pa")\
-		& go_cmds(0, b , "rrb") &go_cmds(a, b , "pa") &go_cmds(0, b , "rrb") &go_cmds(a, b , "pa"));
-//132 : sb pa sb pa pa
+		return (go_cmds(0, b, "rb") & go_cmds(0, b, "rb") & go_cmds(a, b, "pa") \
+		& go_cmds(0, b, "rrb") & go_cmds(a, b, "pa") & go_cmds(0, b, "rrb") & go_cmds(a, b, "pa"));
 	if (fir < thr && sec > thr)
-		return (go_cmds(0, b , "sb") & go_cmds(a, b, "pa") & go_cmds(0, b , "sb") \
-		& go_cmds(a, b , "pa") & go_cmds(a, b , "pa"));
+		return (go_cmds(0, b, "sb") & go_cmds(a, b, "pa") & go_cmds(0, b, "sb") \
+		& go_cmds(a, b, "pa") & go_cmds(a, b, "pa"));
 	return (0);
 }
 

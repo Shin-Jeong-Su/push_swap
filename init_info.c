@@ -6,7 +6,7 @@
 /*   By: jeshin <jeshin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:20:48 by jeshin            #+#    #+#             */
-/*   Updated: 2024/02/20 20:23:08 by jeshin           ###   ########.fr       */
+/*   Updated: 2024/02/21 20:06:49 by jeshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,18 @@ void	init_idx_info(t_idx_info *info, t_dq *here, t_dq *there, int rng)
 	info->lrg_pivot = 0;
 	info->sml_pivot = 0;
 	get_pivot(info, here, rng);
-	info->already = there->size;
+	info->has_size = there->size;
 	info->pa_times = 0;
 	info->pb_times = 0;
 	info->ra_times = 0;
 	info->rb_times = 0;
 	info->data = front_dq(here);
 	info->rng = rng;
+}
+
+void	init_3n(t_dq *dq, t_3n *cmps)
+{
+	cmps->fir = dq->head->data;
+	cmps->sec = dq->head->next->data;
+	cmps->thr = dq->head->next->next->data;
 }

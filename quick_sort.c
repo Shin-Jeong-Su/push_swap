@@ -1,44 +1,54 @@
-#include <stdio.h>
-#define SWAP(x,y,tmp) ((tmp)=(x), (x)=(y), (y)=(tmp))
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   quick_sort.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jeshin <jeshin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/21 16:06:01 by jeshin            #+#    #+#             */
+/*   Updated: 2024/02/21 16:11:52 by jeshin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-static void	partition(int *arr,int *pivot,int left,int right){
-	int low,high,tmp;
+#include "push_swap.h"
+
+static void	swap(int *x, int *y)
+{
+	int	tmp;
+
+	tmp = *y;
+	*y = *x;
+	*x = tmp;
+}
+
+static void	partition(int *arr, int *pivot, int left, int right)
+{
+	int	low;
+	int	high;
 
 	low = left + 1;
 	high = right;
-	while(low <= high){
-		while (low <= right && arr[low] <= arr[*pivot] ){
+	while (low <= high)
+	{
+		while (low <= right && arr[low] <= arr[*pivot])
 			low++;
-		}
-		while (high >= left+1 && arr[high] >= arr[*pivot] ){
+		while (high >= left + 1 && arr[high] >= arr[*pivot])
 			high--;
-		}
-		if (low < high){
-			SWAP(arr[low],arr[high],tmp);
-		}
+		if (low < high)
+			swap(&arr[low], &arr[high]);
 	}
-	SWAP(arr[*pivot],arr[high],tmp);
-
+	swap(&arr[*pivot], &arr[high]);
 	*pivot = high;
 }
-void	quick_sort(int *arr,int left,int right)
-{
-	int pivot = left;
-	if(left >= right)
-		return ;
-	partition(arr,&pivot,left,right);
-	quick_sort(arr,left,pivot-1);
-	quick_sort(arr,pivot+1,right);
-}
 
-// int main(){
-// 	const int size = 2;
-// 	// int arr[size] = {0,100,-32,18,39,2,5,-121};
-// 	int arr[size] = {3,1};
-// 	quick_sort(arr,0,size-1);
-// 	// printf("\n");
-// 	printf("sorted  : ");
-// 	for(int i=0;i<size;i++){
-// 		printf("%d ",arr[i]);
-// 	}
-// }	
+void	quick_sort(int *arr, int left, int right)
+{
+	int	pivot;
+
+	pivot = left;
+	if (left >= right)
+		return ;
+	partition(arr, &pivot, left, right);
+	quick_sort(arr, left, pivot - 1);
+	quick_sort(arr, pivot + 1, right);
+}

@@ -6,7 +6,7 @@
 /*   By: jeshin <jeshin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:58:41 by jeshin            #+#    #+#             */
-/*   Updated: 2024/02/19 16:25:43 by jeshin           ###   ########.fr       */
+/*   Updated: 2024/02/21 16:01:29 by jeshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,34 +35,25 @@ static int	has_same_int(t_dq *dq)
 static int	push_each_to_dq(char **each, t_dq *dq)
 {
 	int			i;
-	int			ret;
-	size_t		size;
 
 	if (*each == 0)
 		return (0);
 	while (*each)
 	{
-		// if ((*each)[0] == 0)
-		// 	return (0);
 		i = 0;
 		if ((*each)[0] == '-')
 			i++;
-		if ((*each)[i] == 0)
+		if ((*each)[i] == 0 || (*each)[0] == 0)
 			return (0);
-		size = (size_t)i;
 		while ((*each)[i])
 		{
 			if (ft_isdigit((*each)[i]) == 0)
 				return (0);
 			i++;
-			size++;
 		}
-		ret = ft_atoi(*each);
-		if (size != ft_strlen(ft_itoa(ret)))
+		if ((size_t)i != ft_strlen(ft_itoa(ft_atoi(*each))))
 			return (0);
-		// if ((long long)ft_atoi(*each) != ft_atol(*each))
-		// 	return (0);
-		push_back_dq(dq, ret);
+		push_back_dq(dq, ft_atoi(*each));
 		each++;
 	}
 	return (1);
@@ -96,29 +87,25 @@ static char	***get_av_tab(int ac, char **av, t_dq *dq)
 static void	push_idx_to_dq(int *idx_tab, t_dq *a, t_dq *b)
 {
 	t_node	*here;
-	int		k;
-	int		l;
+	int		i;
 
 	here = b->head;
-	k = 0;
+	i = 0;
 	while (here)
 	{
-		idx_tab[k++] = here->data;
+		idx_tab[i++] = here->data;
 		here = here->next;
 	}
 	quick_sort(idx_tab, 0, b->size - 1);
 	here = b->tail;
 	while (here)
 	{
-		l = 0;
-		while (l < b->size)
+		i = 0;
+		while (i < b->size)
 		{
-			if (here->data == idx_tab[l])
-			{
-				push_front_dq(a, l);
-				break;
-			}
-			l++;
+			if (here->data == idx_tab[i])
+				push_front_dq(a, i);
+			i++;
 		}
 		here = here->prev;
 	}

@@ -6,7 +6,7 @@
 /*   By: jeshin <jeshin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 15:20:00 by jeshin            #+#    #+#             */
-/*   Updated: 2024/02/20 19:43:26 by jeshin           ###   ########.fr       */
+/*   Updated: 2024/02/21 15:34:39 by jeshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	sort_a(t_dq *a, t_dq *b, int rng)
 		else
 		{
 			info.pb_times += go_cmds(a, b, "pb");
-			if (info.data >= info.sml_pivot && info.already)
+			if (info.data >= info.sml_pivot)
 				info.rb_times += go_cmds(a, b, "rb");
 		}
 	}

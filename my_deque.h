@@ -6,7 +6,7 @@
 /*   By: jeshin <jeshin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:02:27 by jeshin            #+#    #+#             */
-/*   Updated: 2024/02/15 14:38:09 by jeshin           ###   ########.fr       */
+/*   Updated: 2024/02/21 16:05:49 by jeshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 typedef struct s_node
 {
-	int			data;
+	int				data;
 	struct s_node	*prev;
 	struct s_node	*next;
 }					t_node;
@@ -42,8 +42,8 @@ void	print_all_dq(t_dq *dq);
 //my_deque2.c
 void	pop_front_dq(t_dq *dq);
 void	pop_back_dq(t_dq *dq);
-int	front_dq(t_dq *dq);
-int	back_dq(t_dq *dq);
+int		front_dq(t_dq *dq);
+int		back_dq(t_dq *dq);
 void	clear_dq(t_dq *dq);
 
 #endif

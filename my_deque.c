@@ -6,7 +6,7 @@
 /*   By: jeshin <jeshin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:01:46 by jeshin            #+#    #+#             */
-/*   Updated: 2024/02/19 18:17:45 by jeshin           ###   ########.fr       */
+/*   Updated: 2024/02/21 16:02:39 by jeshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	print_all_dq(t_dq *dq)
 	while (here)
 	{
 		ft_putnbr_fd(here->data, 1);
-		write(1,"\t",1);
+		write(1, "\t", 1);
 		here = here->next;
 	}
 }

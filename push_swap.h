@@ -6,7 +6,7 @@
 /*   By: jeshin <jeshin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 10:51:43 by jeshin            #+#    #+#             */
-/*   Updated: 2024/02/20 20:23:13 by jeshin           ###   ########.fr       */
+/*   Updated: 2024/02/21 20:28:05 by jeshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,15 @@ typedef struct s_idx_info
 	int	rb_times;
 	int	data;
 	int	rng;
-	int	already;
+	int	has_size;
 }	t_idx_info;
+
+typedef struct s_3n
+{
+	int	fir;
+	int	sec;
+	int	thr;
+}	t_3n;
 
 //utils.c
 void	check_leaks(void);
@@ -42,16 +49,19 @@ int		is_asc(t_dq *dq, int size);
 int		init(int ac, char **av, t_dq *a, t_dq *b);
 //init_info.c
 void	init_idx_info(t_idx_info *info, t_dq *here, t_dq *there, int rng);
+void	init_3n(t_dq *dq, t_3n *cmps);
 //quick_sort.c
 void	quick_sort(int *arr, int left, int right);
 //command.c
 int		go_cmds(t_dq *a, t_dq *b, char *input);
 //push_swap.c
 int		push_swap(t_dq *a, t_dq *b, int size);
-//sort_3.c
+//sort_size_3.c
 int		sort_a_of_size_3(t_dq *a);
 int		sort_size_lower_than_3(t_dq *a, t_dq *b, int which, int size);
-//sort_4_n_5.c
-int	sort_a_of_size_4(t_dq *a, t_dq *b, int min);
-int	sort_a_of_size_5(t_dq *a, t_dq *b, int min);
+//sort_sml_size.c
+int		sort_a_of_size_4(t_dq *a, t_dq *b, int min);
+int		sort_a_of_size_5(t_dq *a, t_dq *b, int min);
+int		sort_sml_a(t_dq *a, int size);
+int		sort_sml_b(t_dq *a, t_dq *b, int size);
 #endif

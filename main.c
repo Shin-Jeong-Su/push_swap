@@ -6,7 +6,7 @@
 /*   By: jeshin <jeshin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:59:50 by jeshin            #+#    #+#             */
-/*   Updated: 2024/02/21 19:39:29 by jeshin           ###   ########.fr       */
+/*   Updated: 2024/02/22 11:57:27 by jeshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char *argv[])
 		take_error();
 		return (0);
 	}
-	push_swap(&a, &b, a.size);
+	push_swap(&a, &b);
 	clear_dq(&a);
 	clear_dq(&b);
 	return (0);

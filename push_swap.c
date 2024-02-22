@@ -6,7 +6,7 @@
 /*   By: jeshin <jeshin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 15:20:00 by jeshin            #+#    #+#             */
-/*   Updated: 2024/02/21 15:34:39 by jeshin           ###   ########.fr       */
+/*   Updated: 2024/02/22 17:10:05 by jeshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	sort_a(t_dq *a, t_dq *b, int rng)
 	t_idx_info	info;
 
 	if (rng <= 3)
-		return (sort_size_lower_than_3(a, b, A, rng));
+		return (sort_sml_rng_a(a, rng));
 	init_idx_info(&info, a, b, rng);
 	while (rng--)
 	{
@@ -71,7 +71,7 @@ static int	sort_b(t_dq *a, t_dq *b, int rng)
 	t_idx_info	info;
 
 	if (rng <= 3)
-		return (sort_size_lower_than_3(a, b, B, rng));
+		return (sort_sml_b(a, b, rng));
 	init_idx_info(&info, b, a, rng);
 	while (rng--)
 	{
@@ -92,15 +92,26 @@ static int	sort_b(t_dq *a, t_dq *b, int rng)
 	return (1);
 }
 
-int	push_swap(t_dq *a, t_dq *b, int size)
+static int	sort_sml_size_a(t_dq *a, t_dq *b)
+{
+	if (is_asc(a, a->size) || a->size == 0 || a->size == 1)
+		return (1);
+	if (a->size == 2)
+		return (go_cmds(a, 0, "sa"));
+	if (a->size == 3)
+		return (sort_a_of_size_3(a));
+	if (a->size == 4)
+		return (sort_a_of_size_4(a, b, 0));
+	if (a->size == 5)
+		return (sort_a_of_size_5(a, b, 0));
+	return (0);
+}
+
+int	push_swap(t_dq *a, t_dq *b)
 {
 	if (is_asc(a, a->size))
 		return (1);
-	if (size <= 3)
-		return (sort_size_lower_than_3(a, b, A, a->size));
-	if (size == 4)
-		return (sort_a_of_size_4(a, b, 0));
-	if (size == 5)
-		return (sort_a_of_size_5(a, b, 0));
+	if (a->size <= 5)
+		return (sort_sml_size_a(a, b));
 	return (sort_a(a, b, a->size));
 }

@@ -13,8 +13,8 @@ SRCS_NAME = my_deque\
 			quick_sort\
 			command\
 			push_swap\
-			sort_3\
-			sort_4_n_5\
+			sort_sml_a\
+			sort_sml_b\
 			main
 SRCS = $(addsuffix .c,$(SRCS_NAME))
 OBJS = $(addsuffix .o,$(SRCS_NAME))

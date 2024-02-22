@@ -6,7 +6,7 @@
 /*   By: jeshin <jeshin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 20:09:19 by jeshin            #+#    #+#             */
-/*   Updated: 2024/02/20 17:58:09 by jeshin           ###   ########.fr       */
+/*   Updated: 2024/02/21 20:54:11 by jeshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,17 @@ void	take_error(void)
 int	is_asc(t_dq *dq, int size)
 {
 	t_node	*pos;
-	int		tmp;
+	int		cmp;
 	int		i;
 
 	i = -1;
 	pos = dq->head;
-	tmp = dq->head->data;
+	cmp = dq->head->data;
 	while (++i < size - 1 && pos->next)
 	{
-		if (tmp + 1 == pos->next->data)
+		if (cmp + 1 == pos->next->data)
 		{
-			tmp = pos->next->data;
+			cmp = pos->next->data;
 			pos = pos->next;
 		}
 		else

@@ -6,15 +6,24 @@
 /*   By: jeshin <jeshin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 20:09:19 by jeshin            #+#    #+#             */
-/*   Updated: 2024/02/21 20:54:11 by jeshin           ###   ########.fr       */
+/*   Updated: 2024/02/23 17:15:28 by jeshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	check_leaks(void)
+int	is_in_int_rng(char *str, int size)
 {
-	system("leaks push_swap");
+	char		*cmp;
+
+	cmp = ft_itoa(ft_atoi(str));
+	if ((size_t)size != ft_strlen(cmp))
+	{
+		free(cmp);
+		return (0);
+	}
+	free(cmp);
+	return (1);
 }
 
 void	free_tab(char **tab)

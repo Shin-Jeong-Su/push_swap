@@ -6,7 +6,7 @@
 /*   By: jeshin <jeshin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 10:51:43 by jeshin            #+#    #+#             */
-/*   Updated: 2024/02/23 11:37:28 by jeshin           ###   ########.fr       */
+/*   Updated: 2024/02/23 17:15:47 by jeshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_3n
 }	t_3n;
 
 //utils.c
-void	check_leaks(void);
+int		is_in_int_rng(char *str, int size);
 void	free_tab(char **tab);
 void	free_all(char ***tab);
 void	take_error(void);

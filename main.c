@@ -6,12 +6,12 @@
 /*   By: jeshin <jeshin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:59:50 by jeshin            #+#    #+#             */
-/*   Updated: 2024/02/22 11:57:27 by jeshin           ###   ########.fr       */
+/*   Updated: 2024/02/23 17:14:50 by jeshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-//big nums ko
+
 int	main(int argc, char *argv[])
 {
 	t_dq	a;

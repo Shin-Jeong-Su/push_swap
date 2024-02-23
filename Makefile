@@ -16,13 +16,18 @@ SRCS_NAME = my_deque\
 			sort_sml_a\
 			sort_sml_b\
 			main
+
 SRCS = $(addsuffix .c,$(SRCS_NAME))
 OBJS = $(addsuffix .o,$(SRCS_NAME))
 DEPS = $(addsuffix .d,$(SRCS_NAME))
 LIB = ./libft/libft.a
 
-all : $(OBJS) $(LIB)
-	$(CC) $^ -o $(NAME)
+all : mandatory
+
+mandatory : $(OBJS) $(LIB)
+	@$(CC) $^ -o $(NAME)
+	@touch mandatory
+	@echo "push_swap made"
 -include $(DEPS)
 
 d : $(LIB)
@@ -31,8 +36,18 @@ d : $(LIB)
 $(LIB) :
 	@$(MAKE) -C ./libft
 	@$(MAKE) bonus -C ./libft
+
 %.o : %.c
-	$(CC) $(CFLAGS) $(DEPFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $(DEPFLAGS) -c $< -o $@
 
 clean : 
-	$(RM) $(OBJS) $(DEPS)
+	@$(RM) $(OBJS) $(DEPS) mandatory
+	@$(MAKE) -C ./libft clean
+	@echo "cleaned"
+
+fclean : clean
+	@$(RM) $(NAME)
+	@$(MAKE) -C ./libft fclean
+	@echo "fcleaned"
+
+re : fclean all

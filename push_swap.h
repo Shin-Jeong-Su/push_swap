@@ -6,7 +6,7 @@
 /*   By: jeshin <jeshin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 10:51:43 by jeshin            #+#    #+#             */
-/*   Updated: 2024/02/22 17:11:07 by jeshin           ###   ########.fr       */
+/*   Updated: 2024/02/23 11:37:28 by jeshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,7 @@ int		push_swap(t_dq *a, t_dq *b);
 int		sort_sml_b(t_dq *a, t_dq *b, int size);
 //sort_sml_a.c
 int		sort_sml_a(t_dq *a, int rng);
+int		sort_a_of_size_3(t_dq *a);
+int		sort_a_of_size_4(t_dq *a, t_dq *b, int min);
+int		sort_a_of_size_5(t_dq *a, t_dq *b, int min);
 #endif

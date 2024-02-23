@@ -6,7 +6,7 @@
 /*   By: jeshin <jeshin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 15:20:00 by jeshin            #+#    #+#             */
-/*   Updated: 2024/02/22 17:10:05 by jeshin           ###   ########.fr       */
+/*   Updated: 2024/02/23 11:35:59 by jeshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	sort_a(t_dq *a, t_dq *b, int rng)
 	t_idx_info	info;
 
 	if (rng <= 3)
-		return (sort_sml_rng_a(a, rng));
+		return (sort_sml_a(a, rng));
 	init_idx_info(&info, a, b, rng);
 	while (rng--)
 	{

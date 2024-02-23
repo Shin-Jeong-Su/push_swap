@@ -6,16 +6,13 @@
 /*   By: jeshin <jeshin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 18:01:53 by jeshin            #+#    #+#             */
-/*   Updated: 2024/02/22 17:11:06 by jeshin           ###   ########.fr       */
+/*   Updated: 2024/02/23 11:37:39 by jeshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	sort_a_of_size_4(t_dq *a, t_dq *b, int min);
-static int	sort_a_of_size_3(t_dq *a);
-
-static int	sort_a_of_size_5(t_dq *a, t_dq *b, int min)
+int	sort_a_of_size_5(t_dq *a, t_dq *b, int min)
 {
 	t_node	*here;
 	int		cnt;
@@ -42,7 +39,7 @@ static int	sort_a_of_size_5(t_dq *a, t_dq *b, int min)
 	return (sort_a_of_size_4(a, b, 1) & go_cmds(a, b, "pa"));
 }
 
-static int	sort_a_of_size_4(t_dq *a, t_dq *b, int min)
+int	sort_a_of_size_4(t_dq *a, t_dq *b, int min)
 {
 	t_node	*here;
 	int		cnt;
@@ -69,7 +66,7 @@ static int	sort_a_of_size_4(t_dq *a, t_dq *b, int min)
 	return (sort_a_of_size_3(a) & go_cmds(a, b, "pa"));
 }
 
-static int	sort_a_of_size_3(t_dq *a)
+int	sort_a_of_size_3(t_dq *a)
 {
 	t_3n	cmps;
 

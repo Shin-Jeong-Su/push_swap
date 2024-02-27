@@ -6,7 +6,7 @@
 /*   By: jeshin <jeshin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:58:41 by jeshin            #+#    #+#             */
-/*   Updated: 2024/02/23 17:15:31 by jeshin           ###   ########.fr       */
+/*   Updated: 2024/02/27 19:32:57 by jeshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	push_each_to_b(char **each, t_dq *b)
 	return (1);
 }
 
-static char	***get_tab_from_av(int ac, char **av, t_dq *b)
+static char	***av_to_b(int ac, char **av, t_dq *b)
 {
 	int		i;
 	char	***tab;
@@ -120,7 +120,7 @@ int	init(int ac, char **av, t_dq *a, t_dq *b)
 		exit(EXIT_FAILURE);
 	init_dq(a);
 	init_dq(b);
-	tab = get_tab_from_av(ac, av, b);
+	tab = av_to_b(ac, av, b);
 	if (tab == 0)
 		return (0);
 	if (has_same_int(b))
